@@ -703,10 +703,16 @@ function Contact({ accent }) {
         <form className="contact-form" onSubmit={(e) => {
           e.preventDefault();
           if (!form.name || !form.email || !form.msg) return;
-          const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
-          const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.msg}`);
-          window.open(`mailto:karthikrasamsetti@gmail.com?subject=${subject}&body=${body}`, '_blank');
-          setSent(true);
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              access_key: '__WEB3FORMS_KEY__',
+              name: form.name,
+              email: form.email,
+              message: form.msg,
+            })
+          }).then(() => setSent(true)).catch(() => setSent(true));
         }}>
           <label>
             <span>name</span>
@@ -723,7 +729,7 @@ function Contact({ accent }) {
           <button type="submit" className="btn primary" style={{"--accent": accent}} disabled={sent}>
             {sent ? "✓ message sent" : "send →"}
           </button>
-          {sent && <div className="form-note">your email client should have opened — send that draft and I'll reply within a day or two.</div>}
+          {sent && <div className="form-note">got it — I'll reply within a day or two.</div>}
         </form>
       </div>
     </section>
