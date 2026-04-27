@@ -71,39 +71,37 @@ window.RESUME = {
   ],
   experience: [
     {
-      company: "OnTrac",
+      employer: "Feuji",
       role: "QA Automation Engineer",
-      domain: "Logistics & Transportation",
-      period: "2024 — Present",
-      bullets: [
-        { text: "Designed and executed performance testing strategy with k6, holding system stability through peak holiday traffic spikes (~3× normal load).", metric: "3× peak load" },
-        { text: "Migrated legacy WebLOAD load-testing scripts to k6, cutting execution time by ~40% and unlocking parallel cloud runs.", metric: "−40% exec time" },
-        { text: "Built end-to-end pytest framework covering UI flows + database validation across 4 service modules.", metric: "4 modules" },
-        { text: "Integrated automation pipelines into Azure DevOps for continuous testing on every PR — feedback within minutes, not hours.", metric: "PR-gated CI" },
-        { text: "Automated critical workflows previously run manually, reducing manual regression effort by an estimated 60%.", metric: "−60% manual" },
-      ],
-    },
-    {
-      company: "LeaseLock",
-      role: "QA Automation Engineer",
-      domain: "FinTech / Insurance",
-      period: "2023 — 2024",
-      bullets: [
-        { text: "Designed and implemented UTAF (Unified Test Automation Framework) standardising UI, API, and DB testing across teams.", metric: "Framework owner" },
-        { text: "Built reusable, modular components covering end-to-end policy and underwriting workflows — adopted by 3 squads.", metric: "3 squads" },
-        { text: "Wired automation suites into CircleCI with automated email reporting on failures and nightly summaries.", metric: "Auto-reporting" },
-        { text: "Improved regression efficiency through framework reuse, lifting test coverage by ~50% with fewer flaky failures.", metric: "+50% coverage" },
-      ],
-    },
-    {
-      company: "Encore",
-      role: "QA Automation Engineer",
-      domain: "Event Management",
-      period: "2022 — 2023",
-      bullets: [
-        { text: "Developed and maintained BDD automation scripts in Cucumber for event-management workflows (hotels, infrastructure, services).", metric: "BDD" },
-        { text: "Authored cross-browser test suites running on Chrome, Firefox, Safari, and Edge in parallel.", metric: "4 browsers" },
-        { text: "Collaborated in Agile ceremonies — sprint planning, stand-ups, retros — and partnered with devs on shift-left QA practices.", metric: "Agile" },
+      period: "2022 — Present",
+      projects: [
+        {
+          client: "OnTrac", domain: "Logistics & Transportation", period: "2024 — Present",
+          bullets: [
+            { text: "Designed and executed performance testing strategy with k6, holding system stability through peak holiday traffic spikes (~3× normal load).", metric: "3× peak load" },
+            { text: "Migrated legacy WebLOAD load-testing scripts to k6, cutting execution time by ~40% and unlocking parallel cloud runs.", metric: "−40% exec time" },
+            { text: "Built end-to-end pytest framework covering UI flows + database validation across 4 service modules.", metric: "4 modules" },
+            { text: "Integrated automation pipelines into Azure DevOps for continuous testing on every PR — feedback within minutes, not hours.", metric: "PR-gated CI" },
+            { text: "Automated critical workflows previously run manually, reducing manual regression effort by an estimated 60%.", metric: "−60% manual" },
+          ],
+        },
+        {
+          client: "LeaseLock", domain: "FinTech / Insurance", period: "2023 — 2024",
+          bullets: [
+            { text: "Designed and implemented UTAF (Unified Test Automation Framework) standardising UI, API, and DB testing across teams.", metric: "Framework owner" },
+            { text: "Built reusable, modular components covering end-to-end policy and underwriting workflows — adopted by 3 squads.", metric: "3 squads" },
+            { text: "Wired automation suites into CircleCI with automated email reporting on failures and nightly summaries.", metric: "Auto-reporting" },
+            { text: "Improved regression efficiency through framework reuse, lifting test coverage by ~50% with fewer flaky failures.", metric: "+50% coverage" },
+          ],
+        },
+        {
+          client: "Encore", domain: "Event Management", period: "2022 — 2023",
+          bullets: [
+            { text: "Developed and maintained BDD automation scripts in Cucumber for event-management workflows (hotels, infrastructure, services).", metric: "BDD" },
+            { text: "Authored cross-browser test suites running on Chrome, Firefox, Safari, and Edge in parallel.", metric: "4 browsers" },
+            { text: "Collaborated in Agile ceremonies — sprint planning, stand-ups, retros — and partnered with devs on shift-left QA practices.", metric: "Agile" },
+          ],
+        },
       ],
     },
   ],
@@ -201,26 +199,37 @@ function ResumeModern({ tweaks = {} }) {
         <h2 style={secTitle}>Experience</h2>
         {R.experience.map((job, i) => (
           <div key={i} style={{ marginBottom: i === R.experience.length - 1 ? 0 : 20 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 2 }}>
-              <div style={{ fontFamily: fontDisplay, fontSize: 13.5, fontWeight: 600 }}>
-                {job.role} <span style={{ color: accent }}>·</span> {job.company}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10, paddingBottom: 6, borderBottom: "1px solid #e8e8e8" }}>
+              <div style={{ fontFamily: fontDisplay, fontSize: 14, fontWeight: 700 }}>
+                {job.employer}
+                <span style={{ fontSize: 10.5, fontWeight: 400, color: "#666", marginLeft: 10 }}>{job.role}</span>
               </div>
               <div style={{ fontSize: 9.5, color: "#777", fontVariantNumeric: "tabular-nums" }}>{job.period}</div>
             </div>
-            <div style={{ fontSize: 9.5, color: "#999", marginBottom: 7, letterSpacing: "0.05em", textTransform: "uppercase" }}>{job.domain}</div>
-            <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
-              {job.bullets.map((b, j) => (
-                <li key={j} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 100px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
-                  <span style={{ display: "flex", gap: 9 }}>
-                    <span style={{ color: accent, flexShrink: 0 }}>—</span>
-                    <span>{b.text}</span>
-                  </span>
-                  {showMetrics && (
-                    <span style={{ fontSize: 9, color: accent, fontWeight: 600, textAlign: "right", fontVariantNumeric: "tabular-nums", letterSpacing: "0.02em" }}>{b.metric}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
+            {job.projects.map((proj, j) => (
+              <div key={j} style={{ marginBottom: j === job.projects.length - 1 ? 0 : 16, paddingLeft: 14 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 2 }}>
+                  <div style={{ fontFamily: fontDisplay, fontSize: 12.5, fontWeight: 600 }}>
+                    <span style={{ color: accent, marginRight: 6, fontSize: 11 }}>↳</span>{proj.client}
+                  </div>
+                  <div style={{ fontSize: 9.5, color: "#777", fontVariantNumeric: "tabular-nums" }}>{proj.period}</div>
+                </div>
+                <div style={{ fontSize: 9.5, color: "#999", marginBottom: 6, letterSpacing: "0.05em", textTransform: "uppercase" }}>{proj.domain}</div>
+                <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
+                  {proj.bullets.map((b, k) => (
+                    <li key={k} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 100px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
+                      <span style={{ display: "flex", gap: 9 }}>
+                        <span style={{ color: accent, flexShrink: 0 }}>—</span>
+                        <span>{b.text}</span>
+                      </span>
+                      {showMetrics && (
+                        <span style={{ fontSize: 9, color: accent, fontWeight: 600, textAlign: "right", fontVariantNumeric: "tabular-nums", letterSpacing: "0.02em" }}>{b.metric}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         ))}
       </section>
@@ -347,25 +356,35 @@ function ResumeEditorial({ tweaks = {} }) {
         <TitleRule />
         {R.experience.map((job, i) => (
           <div key={i} style={{ marginBottom: i === R.experience.length - 1 ? 0 : 16 }}>
-            <div style={{ textAlign: "center", marginBottom: 5 }}>
-              <div style={{ fontFamily: fontDisplay, fontSize: 15, fontWeight: 600, letterSpacing: "-0.005em" }}>{job.company}</div>
-              <div style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 11, color: "#555", marginTop: 1 }}>
-                {job.role} &nbsp;·&nbsp; {job.domain} &nbsp;·&nbsp; {job.period}
+            <div style={{ textAlign: "center", marginBottom: 10 }}>
+              <div style={{ fontFamily: fontDisplay, fontSize: 16, fontWeight: 600 }}>{job.employer}</div>
+              <div style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 11, color: "#555", marginTop: 2 }}>
+                {job.role} &nbsp;·&nbsp; {job.period}
               </div>
             </div>
-            <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
-              {job.bullets.map((b, j) => (
-                <li key={j} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 90px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
-                  <span style={{ display: "flex", gap: 9 }}>
-                    <span style={{ color: accent, flexShrink: 0 }}>§</span>
-                    <span>{b.text}</span>
-                  </span>
-                  {showMetrics && (
-                    <span style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 9.5, color: accent, textAlign: "right" }}>{b.metric}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
+            {job.projects.map((proj, j) => (
+              <div key={j} style={{ marginBottom: j === job.projects.length - 1 ? 0 : 14 }}>
+                <div style={{ textAlign: "center", marginBottom: 4 }}>
+                  <div style={{ fontFamily: fontDisplay, fontSize: 13, fontWeight: 600, color: accent }}>{proj.client}</div>
+                  <div style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 10.5, color: "#777", marginTop: 1 }}>
+                    {proj.domain} &nbsp;·&nbsp; {proj.period}
+                  </div>
+                </div>
+                <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
+                  {proj.bullets.map((b, k) => (
+                    <li key={k} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 90px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
+                      <span style={{ display: "flex", gap: 9 }}>
+                        <span style={{ color: accent, flexShrink: 0 }}>§</span>
+                        <span>{b.text}</span>
+                      </span>
+                      {showMetrics && (
+                        <span style={{ fontFamily: fontDisplay, fontStyle: "italic", fontSize: 9.5, color: accent, textAlign: "right" }}>{b.metric}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         ))}
       </section>
@@ -512,26 +531,36 @@ function ResumeTech({ tweaks = {} }) {
         <SectionTitle num="03" label="EXPERIENCE" />
         {R.experience.map((job, i) => (
           <div key={i} style={{ marginBottom: i === R.experience.length - 1 ? 0 : 16 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8, paddingBottom: 5, borderBottom: "1px solid #e8e8e8" }}>
               <div>
-                <span style={{ fontFamily: fontDisplay, fontSize: 13, fontWeight: 700 }}>{job.company}</span>
-                <span style={{ color: accent, margin: "0 7px" }}>/</span>
-                <span style={{ fontSize: 11.5, color: "#222" }}>{job.role}</span>
+                <span style={{ fontFamily: fontDisplay, fontSize: 14, fontWeight: 700 }}>{job.employer}</span>
+                <span style={{ fontFamily: fontDisplay, fontSize: 9, color: "#777", marginLeft: 10 }}>{job.role}</span>
               </div>
-              <div style={{ fontFamily: fontBody, fontSize: 9, color: "#777", fontVariantNumeric: "tabular-nums" }}>{job.period}</div>
+              <div style={{ fontFamily: fontDisplay, fontSize: 9, color: accent, fontVariantNumeric: "tabular-nums" }}>{job.period}</div>
             </div>
-            <div style={{ marginBottom: 7 }}><Tag text={job.domain.toLowerCase()} color="#888" /></div>
-            <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
-              {job.bullets.map((b, j) => (
-                <li key={j} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 100px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
-                  <span style={{ display: "flex", gap: 9 }}>
-                    <span style={{ color: accent, fontFamily: fontBody, flexShrink: 0 }}>›</span>
-                    <span>{b.text}</span>
-                  </span>
-                  {showMetrics && <span style={{ textAlign: "right" }}><Tag text={b.metric} /></span>}
-                </li>
-              ))}
-            </ul>
+            {job.projects.map((proj, j) => (
+              <div key={j} style={{ marginBottom: j === job.projects.length - 1 ? 0 : 14, paddingLeft: 12 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 4 }}>
+                  <div>
+                    <span style={{ color: accent, fontFamily: fontDisplay, marginRight: 6 }}>›</span>
+                    <span style={{ fontFamily: fontDisplay, fontSize: 12.5, fontWeight: 700 }}>{proj.client}</span>
+                  </div>
+                  <div style={{ fontFamily: fontDisplay, fontSize: 9, color: "#777", fontVariantNumeric: "tabular-nums" }}>{proj.period}</div>
+                </div>
+                <div style={{ marginBottom: 6 }}><Tag text={proj.domain.toLowerCase()} color="#888" /></div>
+                <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none" }}>
+                  {proj.bullets.map((b, k) => (
+                    <li key={k} style={{ display: "grid", gridTemplateColumns: showMetrics ? "1fr 100px" : "1fr", gap: 10, padding: "2.5px 0", fontSize: 10.5, lineHeight: 1.55, alignItems: "baseline" }}>
+                      <span style={{ display: "flex", gap: 9 }}>
+                        <span style={{ color: accent, fontFamily: fontBody, flexShrink: 0 }}>›</span>
+                        <span>{b.text}</span>
+                      </span>
+                      {showMetrics && <span style={{ textAlign: "right" }}><Tag text={b.metric} /></span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         ))}
       </section>
