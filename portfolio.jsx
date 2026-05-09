@@ -59,10 +59,10 @@ function TestRunner({ accent }) {
   return (
     <div className="test-runner" style={{ "--accent": accent }}>
       <div className="tr-chrome">
-        <div className="tr-dots"><span/><span/><span/></div>
+        <div className="tr-dots"><span /><span /><span /></div>
         <div className="tr-title">playwright test --reporter=line</div>
         <div className="tr-status">
-          <span className={`tr-pulse ${running ? "live" : ""}`}/>
+          <span className={`tr-pulse ${running ? "live" : ""}`} />
           {running ? "running" : "idle"}
         </div>
       </div>
@@ -86,10 +86,10 @@ function TestRunner({ accent }) {
         )}
       </div>
       <div className="tr-footer">
-        <div className="tr-stat"><span className="dot pass"/>{stats.passed} passed</div>
-        <div className="tr-stat"><span className="dot fail"/>{stats.failed} failed</div>
-        <div className="tr-stat"><span className="dot mute"/>{stats.total}/{TEST_SUITE.length}</div>
-        <div className="tr-stat tr-dur">{(dur/1000).toFixed(2)}s</div>
+        <div className="tr-stat"><span className="dot pass" />{stats.passed} passed</div>
+        <div className="tr-stat"><span className="dot fail" />{stats.failed} failed</div>
+        <div className="tr-stat"><span className="dot mute" />{stats.total}/{TEST_SUITE.length}</div>
+        <div className="tr-stat tr-dur">{(dur / 1000).toFixed(2)}s</div>
       </div>
     </div>
   );
@@ -99,15 +99,15 @@ function TestRunner({ accent }) {
 // AGENT LOG variant (alternative hero)
 // ──────────────────────────────────────────────────────────────────────
 const AGENT_STEPS = [
-  { kind: "user",    text: "Verify checkout flow handles invalid coupon" },
+  { kind: "user", text: "Verify checkout flow handles invalid coupon" },
   { kind: "thought", text: "Plan: navigate → add item → apply coupon → assert error toast" },
-  { kind: "tool",    text: "browser.goto('/cart')",            result: "200 OK · 412ms" },
-  { kind: "tool",    text: "browser.click('[data-test=add]')", result: "ok" },
-  { kind: "tool",    text: "browser.fill('#promo', 'EXPIRED')", result: "ok" },
-  { kind: "tool",    text: "browser.click('button[type=submit]')", result: "ok" },
+  { kind: "tool", text: "browser.goto('/cart')", result: "200 OK · 412ms" },
+  { kind: "tool", text: "browser.click('[data-test=add]')", result: "ok" },
+  { kind: "tool", text: "browser.fill('#promo', 'EXPIRED')", result: "ok" },
+  { kind: "tool", text: "browser.click('button[type=submit]')", result: "ok" },
   { kind: "thought", text: "Expecting role=alert with text matching /expired|invalid/i" },
-  { kind: "tool",    text: "browser.assert.toast(/expired/i)", result: "✓ matched" },
-  { kind: "done",    text: "Test PASSED · 1 of 1 scenarios green" },
+  { kind: "tool", text: "browser.assert.toast(/expired/i)", result: "✓ matched" },
+  { kind: "done", text: "Test PASSED · 1 of 1 scenarios green" },
 ];
 
 function AgentLog({ accent }) {
@@ -124,10 +124,10 @@ function AgentLog({ accent }) {
   return (
     <div className="test-runner" style={{ "--accent": accent }}>
       <div className="tr-chrome">
-        <div className="tr-dots"><span/><span/><span/></div>
+        <div className="tr-dots"><span /><span /><span /></div>
         <div className="tr-title">qa-agent · trace</div>
         <div className="tr-status">
-          <span className="tr-pulse live"/>thinking
+          <span className="tr-pulse live" />thinking
         </div>
       </div>
       <div className="tr-body agent">
@@ -142,7 +142,7 @@ function AgentLog({ accent }) {
         ))}
       </div>
       <div className="tr-footer">
-        <div className="tr-stat"><span className="dot pass"/>step {shown}/{AGENT_STEPS.length}</div>
+        <div className="tr-stat"><span className="dot pass" />step {shown}/{AGENT_STEPS.length}</div>
         <div className="tr-stat tr-dur">claude-sonnet · tools=3</div>
       </div>
     </div>
@@ -153,55 +153,55 @@ function AgentLog({ accent }) {
 // PERF GRAPH variant
 // ──────────────────────────────────────────────────────────────────────
 function PerfGraph({ accent }) {
-  const [data, setData] = useState(() => Array.from({length: 40}, (_,i) => 120 + Math.sin(i/3)*40 + Math.random()*30));
+  const [data, setData] = useState(() => Array.from({ length: 40 }, (_, i) => 120 + Math.sin(i / 3) * 40 + Math.random() * 30));
   useEffect(() => {
     const id = setInterval(() => {
-      setData(d => [...d.slice(1), 120 + Math.sin(Date.now()/600)*40 + Math.random()*40]);
+      setData(d => [...d.slice(1), 120 + Math.sin(Date.now() / 600) * 40 + Math.random() * 40]);
     }, 180);
     return () => clearInterval(id);
   }, []);
   const max = Math.max(...data);
   const min = Math.min(...data);
-  const last = data[data.length-1];
-  const p95 = [...data].sort((a,b)=>a-b)[Math.floor(data.length*0.95)];
+  const last = data[data.length - 1];
+  const p95 = [...data].sort((a, b) => a - b)[Math.floor(data.length * 0.95)];
 
   return (
     <div className="test-runner" style={{ "--accent": accent }}>
       <div className="tr-chrome">
-        <div className="tr-dots"><span/><span/><span/></div>
+        <div className="tr-dots"><span /><span /><span /></div>
         <div className="tr-title">k6 run --vus=1000 --duration=30s</div>
-        <div className="tr-status"><span className="tr-pulse live"/>streaming</div>
+        <div className="tr-status"><span className="tr-pulse live" />streaming</div>
       </div>
       <div className="tr-body perf">
         <svg viewBox="0 0 400 140" preserveAspectRatio="none" className="perf-svg">
           <defs>
             <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={accent} stopOpacity="0.35"/>
-              <stop offset="100%" stopColor={accent} stopOpacity="0"/>
+              <stop offset="0%" stopColor={accent} stopOpacity="0.35" />
+              <stop offset="100%" stopColor={accent} stopOpacity="0" />
             </linearGradient>
           </defs>
-          {[0,1,2,3].map(i => <line key={i} x1="0" x2="400" y1={i*35} y2={i*35} stroke="rgba(255,255,255,0.05)"/>)}
+          {[0, 1, 2, 3].map(i => <line key={i} x1="0" x2="400" y1={i * 35} y2={i * 35} stroke="rgba(255,255,255,0.05)" />)}
           <polyline
             fill="url(#pg)"
             stroke="none"
-            points={`0,140 ${data.map((v,i) => `${(i/(data.length-1))*400},${140 - ((v-50)/250)*140}`).join(" ")} 400,140`}
+            points={`0,140 ${data.map((v, i) => `${(i / (data.length - 1)) * 400},${140 - ((v - 50) / 250) * 140}`).join(" ")} 400,140`}
           />
           <polyline
             fill="none"
             stroke={accent}
             strokeWidth="1.5"
-            points={data.map((v,i) => `${(i/(data.length-1))*400},${140 - ((v-50)/250)*140}`).join(" ")}
+            points={data.map((v, i) => `${(i / (data.length - 1)) * 400},${140 - ((v - 50) / 250) * 140}`).join(" ")}
           />
         </svg>
         <div className="perf-grid">
-          <div><span className="perf-k">requests/s</span><span className="perf-v">{Math.round(last*7.4).toLocaleString()}</span></div>
-          <div><span className="perf-k">p50</span><span className="perf-v">{Math.round(min*0.6)}ms</span></div>
-          <div><span className="perf-k">p95</span><span className="perf-v" style={{color: accent}}>{Math.round(p95)}ms</span></div>
+          <div><span className="perf-k">requests/s</span><span className="perf-v">{Math.round(last * 7.4).toLocaleString()}</span></div>
+          <div><span className="perf-k">p50</span><span className="perf-v">{Math.round(min * 0.6)}ms</span></div>
+          <div><span className="perf-k">p95</span><span className="perf-v" style={{ color: accent }}>{Math.round(p95)}ms</span></div>
           <div><span className="perf-k">errors</span><span className="perf-v">0.02%</span></div>
         </div>
       </div>
       <div className="tr-footer">
-        <div className="tr-stat"><span className="dot pass"/>SLO: p95 &lt; 250ms</div>
+        <div className="tr-stat"><span className="dot pass" />SLO: p95 &lt; 250ms</div>
         <div className="tr-stat tr-dur">vus=1000 · iter=84,221</div>
       </div>
     </div>
@@ -212,15 +212,15 @@ function PerfGraph({ accent }) {
 // HERO
 // ──────────────────────────────────────────────────────────────────────
 function Hero({ accent, variant }) {
-  const widget = variant === "agent" ? <AgentLog accent={accent}/>
-              : variant === "perf"   ? <PerfGraph accent={accent}/>
-              :                        <TestRunner accent={accent}/>;
+  const widget = variant === "agent" ? <AgentLog accent={accent} />
+    : variant === "perf" ? <PerfGraph accent={accent} />
+      : <TestRunner accent={accent} />;
   return (
     <section className="hero">
       <div className="hero-grid">
         <div className="hero-left">
           <div className="meta-row">
-            <span className="meta-dot" style={{background: accent}}/>
+            <span className="meta-dot" style={{ background: accent }} />
             <span className="meta-text">QA · Automation · {new Date().getFullYear()}</span>
             <span className="meta-sep">/</span>
             <span className="meta-text">available for AI engineering roles</span>
@@ -230,16 +230,16 @@ function Hero({ accent, variant }) {
             <span className="muted"> — building </span>
             <span className="hero-em">intelligent testing systems</span>
             <span className="muted"> at the seam of </span>
-            <span className="hero-em" style={{color: accent}}>QA &amp; AI</span>.
+            <span className="hero-em" style={{ color: accent }}>QA &amp; AI</span>.
           </h1>
           <p className="hero-sub">
             3+ years writing automation that catches what humans miss. Now teaching agents
             to do the same — Playwright, k6, and a growing stack of LLM tooling.
           </p>
           <div className="cta-row">
-            <a className="btn primary" href="#projects" style={{"--accent": accent}}>
+            <a className="btn primary" href="#projects" style={{ "--accent": accent }}>
               <span>view projects</span>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8m0 0L7 3m4 4L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8m0 0L7 3m4 4L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a className="btn ghost" href="./Resume.html" target="_blank" rel="noreferrer">
               view resume ↗
@@ -268,12 +268,12 @@ function Hero({ accent, variant }) {
 function SectionHeader({ idx, title, kicker, id }) {
   return (
     <header className="section-h" id={id}>
-      <div className="section-num">§{String(idx).padStart(2,"0")}</div>
+      <div className="section-num">§{String(idx).padStart(2, "0")}</div>
       <div>
         <div className="section-kicker">{kicker}</div>
         <h2 className="section-title">{title}</h2>
       </div>
-      <div className="section-rule"/>
+      <div className="section-rule" />
     </header>
   );
 }
@@ -284,13 +284,13 @@ function SectionHeader({ idx, title, kicker, id }) {
 function About() {
   return (
     <section className="section about">
-      <SectionHeader idx={1} kicker="who" title="About" id="about"/>
+      <SectionHeader idx={1} kicker="who" title="About" id="about" />
       <div className="about-grid">
         <div className="about-prose">
           <p className="lead">
             I'm a QA automation engineer who got tired of writing the same selectors over and over —
             so I started looking at what comes next. <em>Agents that read the UI like a person does.
-            LLMs that draft test cases from a PR diff. Self-healing locators.</em>
+              LLMs that draft test cases from a PR diff. Self-healing locators.</em>
           </p>
           <p>
             For three years I've built end-to-end frameworks in Playwright, Selenium, and WebdriverIO,
@@ -324,55 +324,65 @@ function About() {
 // SKILLS
 // ──────────────────────────────────────────────────────────────────────
 const SKILL_GROUPS = [
-  { label: "automation",  items: [
-    { name: "Playwright",   level: 92 },
-    { name: "Selenium",     level: 88 },
-    { name: "WebdriverIO",  level: 80 },
-    { name: "Cypress",      level: 65 },
-  ]},
-  { label: "languages",   items: [
-    { name: "JavaScript / TypeScript", level: 90 },
-    { name: "Java",         level: 85 },
-    { name: "Python",       level: 72 },
-    { name: "SQL",          level: 70 },
-  ]},
-  { label: "performance", items: [
-    { name: "k6",           level: 86 },
-    { name: "JMeter",       level: 65 },
-    { name: "Lighthouse CI",level: 60 },
-  ]},
-  { label: "devops",      items: [
-    { name: "Jenkins",      level: 84 },
-    { name: "GitHub Actions",level: 78 },
-    { name: "Docker",       level: 70 },
-    { name: "Allure / reporting", level: 75 },
-  ]},
-  { label: "ai · learning", items: [
-    { name: "LLMs (OpenAI, Claude)", level: 62 },
-    { name: "LangGraph / agents",    level: 50 },
-    { name: "RAG pipelines",         level: 55 },
-    { name: "Prompt engineering",    level: 65 },
-  ]},
+  {
+    label: "automation", items: [
+      { name: "Playwright", level: 92 },
+      { name: "Selenium", level: 88 },
+      { name: "WebdriverIO", level: 80 },
+      { name: "Cypress", level: 65 },
+    ]
+  },
+  {
+    label: "languages", items: [
+      { name: "JavaScript / TypeScript", level: 90 },
+      { name: "Java", level: 85 },
+      { name: "Python", level: 72 },
+      { name: "SQL", level: 70 },
+    ]
+  },
+  {
+    label: "performance", items: [
+      { name: "k6", level: 86 },
+      { name: "JMeter", level: 65 },
+      { name: "Lighthouse CI", level: 60 },
+    ]
+  },
+  {
+    label: "devops", items: [
+      { name: "Jenkins", level: 84 },
+      { name: "GitHub Actions", level: 78 },
+      { name: "Docker", level: 70 },
+      { name: "Allure / reporting", level: 75 },
+    ]
+  },
+  {
+    label: "ai · learning", items: [
+      { name: "LLMs (OpenAI, Claude)", level: 62 },
+      { name: "LangGraph / agents", level: 50 },
+      { name: "RAG pipelines", level: 55 },
+      { name: "Prompt engineering", level: 65 },
+    ]
+  },
 ];
 
 function Skills({ accent }) {
   return (
     <section className="section">
-      <SectionHeader idx={2} kicker="what" title="Skills" id="skills"/>
+      <SectionHeader idx={2} kicker="what" title="Skills" id="skills" />
       <div className="skills-grid">
         {SKILL_GROUPS.map(g => (
           <div key={g.label} className="skill-col">
             <div className="skill-col-h">
               <span className="skill-col-label">{g.label}</span>
-              <span className="skill-col-rule"/>
+              <span className="skill-col-rule" />
             </div>
             {g.items.map(s => (
               <div key={s.name} className="skill-row">
                 <div className="skill-name">{s.name}</div>
                 <div className="skill-bar">
-                  <div className="skill-fill" style={{width: `${s.level}%`, background: accent}}/>
+                  <div className="skill-fill" style={{ width: `${s.level}%`, background: accent }} />
                   <div className="skill-bar-ticks">
-                    {Array.from({length: 20}).map((_,i) => <span key={i}/>)}
+                    {Array.from({ length: 20 }).map((_, i) => <span key={i} />)}
                   </div>
                 </div>
                 <div className="skill-pct">{s.level}</div>
@@ -431,6 +441,17 @@ const PROJECTS = [
     pinned: true,
   },
   {
+    name: "scam-analyzer",
+    desc: "AI scam detection system with a built-in evaluation layer — GPT-4o mini classifies SMS/email/WhatsApp messages as scam or safe, while DeepEval runs hallucination, relevancy, and confidence calibration checks on every response. Includes LangSmith tracing, a Factory-pattern LLM abstraction, FastAPI + Streamlit UI with live eval scores.",
+    tech: ["Python", "LangChain", "OpenAI", "DeepEval", "LangSmith", "FastAPI", "Streamlit"],
+    tags: ["ai", "automation"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "found & fixed a hallucination failure via eval loop — prompt v1 → v2 improved from 90% to 100%",
+    url: "https://github.com/karthikrasamsetti/scam-analyzer",
+    pinned: true,
+    fresh: true,
+  },
+  {
     name: "OrangeHrmSelenium",
     desc: "Selenium + TestNG + Maven automation suite for OrangeHRM — Excel-driven data management, structured Allure-style reporting, TestNG parallel execution, and clean Page Object separation.",
     tech: ["Java", "Selenium", "TestNG", "Maven"],
@@ -472,19 +493,19 @@ function Projects({ accent }) {
 
   return (
     <section className="section">
-      <SectionHeader idx={3} kicker="builds" title="Projects" id="projects"/>
+      <SectionHeader idx={3} kicker="builds" title="Projects" id="projects" />
       <div className="proj-toolbar">
         <div className="proj-filters">
           {FILTERS.map(f => (
             <button
               key={f.key}
-              className={`chip ${filter===f.key ? "active" : ""}`}
+              className={`chip ${filter === f.key ? "active" : ""}`}
               onClick={() => setFilter(f.key)}
-              style={filter===f.key ? {"--accent": accent} : {}}
+              style={filter === f.key ? { "--accent": accent } : {}}
             >
               {f.label}
               <span className="chip-count">
-                {f.key==="all" ? PROJECTS.length : PROJECTS.filter(p=>p.tags.includes(f.key)).length}
+                {f.key === "all" ? PROJECTS.length : PROJECTS.filter(p => p.tags.includes(f.key)).length}
               </span>
             </button>
           ))}
@@ -495,13 +516,13 @@ function Projects({ accent }) {
       </div>
       <div className="proj-grid">
         {visible.map(p => (
-          <article key={p.name} className={`proj-card ${p.pinned?"pinned":""}`}>
+          <article key={p.name} className={`proj-card ${p.pinned ? "pinned" : ""}`}>
             <div className="proj-head">
               <div className="proj-name">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z" /></svg>
                 <a href={p.url} target="_blank" rel="noreferrer">{p.name}</a>
                 {p.pinned && <span className="badge pinned-badge">pinned</span>}
-                {p.fresh && <span className="badge fresh-badge" style={{color: accent, borderColor: accent}}>new</span>}
+                {p.fresh && <span className="badge fresh-badge" style={{ color: accent, borderColor: accent }}>new</span>}
               </div>
               <div className="proj-meta">
                 <span className="ghm">★ {p.stars}</span>
@@ -515,7 +536,7 @@ function Projects({ accent }) {
             </div>
             <div className="proj-foot">
               <div className="proj-lang">
-                <span className="lang-dot" style={{background: p.langColor}}/>
+                <span className="lang-dot" style={{ background: p.langColor }} />
                 <span>{p.lang}</span>
               </div>
               <div className="proj-tech">
@@ -533,33 +554,43 @@ function Projects({ accent }) {
 // AI JOURNEY TIMELINE
 // ──────────────────────────────────────────────────────────────────────
 const TIMELINE = [
-  { when: "2024 · Q3", title: "Started taking LLMs seriously",
-    body: "Stopped seeing them as autocomplete, started seeing them as test partners. Read the OpenAI cookbook end to end. Built a prompt that drafted Playwright assertions from screenshots." },
-  { when: "2024 · Q4", title: "First agent that did real work",
-    body: "A Claude-tool-use loop that could open a URL, click a flow, and write a test for it. Janky, slow, glorious. Convinced me this is the path." },
-  { when: "2025 · Q1", title: "RAG over the bug DB",
-    body: "Indexed three years of Jira + spec docs. Now I can ask 'has anyone seen this stack trace before?' and get an answer with citations. Saved a sprint." },
-  { when: "2025 · Q2", title: "LangGraph for test orchestration",
-    body: "Moved from single-shot prompts to stateful graphs. Plan → execute → reflect → retry. Currently the most reliable test-author I've worked with." },
-  { when: "now",       title: "Self-healing locators + intent-based tests",
-    body: "Building a small library that lets you describe a test in English and have it survive UI rewrites. Open-sourcing pieces as they harden.", current: true },
+  {
+    when: "2024 · Q3", title: "Started taking LLMs seriously",
+    body: "Stopped seeing them as autocomplete, started seeing them as test partners. Read the OpenAI cookbook end to end. Built a prompt that drafted Playwright assertions from screenshots."
+  },
+  {
+    when: "2024 · Q4", title: "First agent that did real work",
+    body: "A Claude-tool-use loop that could open a URL, click a flow, and write a test for it. Janky, slow, glorious. Convinced me this is the path."
+  },
+  {
+    when: "2025 · Q1", title: "RAG over the bug DB",
+    body: "Indexed three years of Jira + spec docs. Now I can ask 'has anyone seen this stack trace before?' and get an answer with citations. Saved a sprint."
+  },
+  {
+    when: "2025 · Q2", title: "LangGraph for test orchestration",
+    body: "Moved from single-shot prompts to stateful graphs. Plan → execute → reflect → retry. Currently the most reliable test-author I've worked with."
+  },
+  {
+    when: "now", title: "Self-healing locators + intent-based tests",
+    body: "Building a small library that lets you describe a test in English and have it survive UI rewrites. Open-sourcing pieces as they harden.", current: true
+  },
 ];
 
 function Journey({ accent }) {
   return (
     <section className="section journey">
-      <SectionHeader idx={4} kicker="trajectory" title="AI Journey" id="ai"/>
+      <SectionHeader idx={4} kicker="trajectory" title="AI Journey" id="ai" />
       <div className="tl">
-        <div className="tl-axis" style={{background: `linear-gradient(180deg, transparent, ${accent}55, transparent)`}}/>
+        <div className="tl-axis" style={{ background: `linear-gradient(180deg, transparent, ${accent}55, transparent)` }} />
         {TIMELINE.map((t, i) => (
-          <div key={i} className={`tl-row ${t.current?"current":""}`}>
+          <div key={i} className={`tl-row ${t.current ? "current" : ""}`}>
             <div className="tl-when">{t.when}</div>
             <div className="tl-node">
-              <span className="tl-dot" style={{background: t.current?accent:"#444"}}/>
-              {t.current && <span className="tl-pulse" style={{background: accent}}/>}
+              <span className="tl-dot" style={{ background: t.current ? accent : "#444" }} />
+              {t.current && <span className="tl-pulse" style={{ background: accent }} />}
             </div>
             <div className="tl-card">
-              <h4>{t.title}{t.current && <span className="now-tag" style={{color: accent, borderColor: accent}}>now</span>}</h4>
+              <h4>{t.title}{t.current && <span className="now-tag" style={{ color: accent, borderColor: accent }}>now</span>}</h4>
               <p>{t.body}</p>
             </div>
           </div>
@@ -574,25 +605,25 @@ function Journey({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 function Now({ accent }) {
   const items = [
-    { tag: "reading",  text: "“Building Effective Agents” — Anthropic" },
+    { tag: "reading", text: "“Building Effective Agents” — Anthropic" },
     { tag: "building", text: "qa-agent-lab — agent that drafts tests from PR diffs" },
     { tag: "studying", text: "LangGraph state machines + persistence patterns" },
-    { tag: "tinkering",text: "DSPy for prompt optimization on test-classification tasks" },
+    { tag: "tinkering", text: "DSPy for prompt optimization on test-classification tasks" },
     { tag: "watching", text: "How frontier labs do internal evals — fascinating stuff" },
   ];
   return (
     <section className="section now">
-      <SectionHeader idx={5} kicker="this week" title="Now" id="now"/>
+      <SectionHeader idx={5} kicker="this week" title="Now" id="now" />
       <div className="now-card">
         <div className="now-head">
-          <span className="now-dot" style={{background: accent}}/>
-          <span>last updated · {new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}</span>
+          <span className="now-dot" style={{ background: accent }} />
+          <span>last updated · {new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
           <span className="now-loc">· from Hyderabad</span>
         </div>
         <ul className="now-list">
           {items.map((it, i) => (
             <li key={i}>
-              <span className="now-tag-l" style={{color: accent}}>{it.tag}</span>
+              <span className="now-tag-l" style={{ color: accent }}>{it.tag}</span>
               <span>{it.text}</span>
             </li>
           ))}
@@ -646,7 +677,7 @@ const EXPERIENCE = [
 function Experience() {
   return (
     <section className="section">
-      <SectionHeader idx={6} kicker="track record" title="Experience" id="experience"/>
+      <SectionHeader idx={6} kicker="track record" title="Experience" id="experience" />
       <div className="exp-list">
         {EXPERIENCE.map((e, i) => (
           <div key={i} className="exp-row">
@@ -673,7 +704,7 @@ function Contact({ accent }) {
 
   return (
     <section className="section contact">
-      <SectionHeader idx={7} kicker="get in touch" title="Contact" id="contact"/>
+      <SectionHeader idx={7} kicker="get in touch" title="Contact" id="contact" />
       <div className="contact-grid">
         <div className="contact-prose">
           <h3>Have an interesting QA-meets-AI problem?</h3>
@@ -716,17 +747,17 @@ function Contact({ accent }) {
         }}>
           <label>
             <span>name</span>
-            <input value={form.name} onChange={e=>setForm({...form, name: e.target.value})} placeholder="ada lovelace" disabled={sent}/>
+            <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="ada lovelace" disabled={sent} />
           </label>
           <label>
             <span>email</span>
-            <input type="email" value={form.email} onChange={e=>setForm({...form, email: e.target.value})} placeholder="ada@analytical.engine" disabled={sent}/>
+            <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="ada@analytical.engine" disabled={sent} />
           </label>
           <label>
             <span>message</span>
-            <textarea rows="5" value={form.msg} onChange={e=>setForm({...form, msg: e.target.value})} placeholder="what are you working on?" disabled={sent}/>
+            <textarea rows="5" value={form.msg} onChange={e => setForm({ ...form, msg: e.target.value })} placeholder="what are you working on?" disabled={sent} />
           </label>
-          <button type="submit" className="btn primary" style={{"--accent": accent}} disabled={sent}>
+          <button type="submit" className="btn primary" style={{ "--accent": accent }} disabled={sent}>
             {sent ? "✓ message sent" : "send →"}
           </button>
           {sent && <div className="form-note">got it — I'll reply within a day or two.</div>}
@@ -750,7 +781,7 @@ function Nav({ accent }) {
     <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-inner">
         <a href="#" className="brand">
-          <span className="brand-mark" style={{background: accent}}/>
+          <span className="brand-mark" style={{ background: accent }} />
           <span className="brand-text">karthik<span className="muted">.dev</span></span>
         </a>
         <div className="nav-links">
@@ -761,7 +792,7 @@ function Nav({ accent }) {
           <a href="#now">now</a>
           <a href="#contact">contact</a>
         </div>
-        <a href="#contact" className="nav-cta" style={{"--accent": accent}}>get in touch</a>
+        <a href="#contact" className="nav-cta" style={{ "--accent": accent }}>get in touch</a>
       </div>
     </nav>
   );
@@ -771,8 +802,8 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="ascii-art">
-{`  ┌──────────────────────────────────────────────────────┐
-  │  built with care · last deploy ${new Date().toISOString().slice(0,10)}              │
+        {`  ┌──────────────────────────────────────────────────────┐
+  │  built with care · last deploy ${new Date().toISOString().slice(0, 10)}              │
   │  no trackers · no cookies · just html + a little js  │
   └──────────────────────────────────────────────────────┘`}
       </div>
@@ -794,24 +825,24 @@ function Tweaks({ tweaks, setTweak }) {
   return (
     <TweaksPanel title="Tweaks">
       <TweakSection title="Look">
-        <TweakColor label="Accent" value={tweaks.accent} onChange={v=>setTweak("accent", v)}/>
+        <TweakColor label="Accent" value={tweaks.accent} onChange={v => setTweak("accent", v)} />
         <TweakRadio
           label="Display font"
           value={tweaks.displayFont}
-          onChange={v=>setTweak("displayFont", v)}
+          onChange={v => setTweak("displayFont", v)}
           options={[
-            {value:"grotesk", label:"Grotesk"},
-            {value:"serif",   label:"Serif"},
-            {value:"mono",    label:"Mono"},
+            { value: "grotesk", label: "Grotesk" },
+            { value: "serif", label: "Serif" },
+            { value: "mono", label: "Mono" },
           ]}
         />
         <TweakRadio
           label="Density"
           value={tweaks.density}
-          onChange={v=>setTweak("density", v)}
+          onChange={v => setTweak("density", v)}
           options={[
-            {value:"comfortable", label:"Comfy"},
-            {value:"compact",     label:"Compact"},
+            { value: "comfortable", label: "Comfy" },
+            { value: "compact", label: "Compact" },
           ]}
         />
       </TweakSection>
@@ -819,11 +850,11 @@ function Tweaks({ tweaks, setTweak }) {
         <TweakSelect
           label="Variant"
           value={tweaks.heroVariant}
-          onChange={v=>setTweak("heroVariant", v)}
+          onChange={v => setTweak("heroVariant", v)}
           options={[
-            {value:"test-runner", label:"Live test runner (Playwright)"},
-            {value:"agent",       label:"AI agent trace log"},
-            {value:"perf",        label:"k6 perf graph"},
+            { value: "test-runner", label: "Live test runner (Playwright)" },
+            { value: "agent", label: "AI agent trace log" },
+            { value: "perf", label: "k6 perf graph" },
           ]}
         />
       </TweakSection>
@@ -847,21 +878,21 @@ function App() {
 
   return (
     <div className="app">
-      <Nav accent={accent}/>
+      <Nav accent={accent} />
       <main>
-        <Hero accent={accent} variant={tweaks.heroVariant}/>
-        <About/>
-        <Skills accent={accent}/>
-        <Projects accent={accent}/>
-        <Journey accent={accent}/>
-        <Now accent={accent}/>
-        <Experience/>
-        <Contact accent={accent}/>
+        <Hero accent={accent} variant={tweaks.heroVariant} />
+        <About />
+        <Skills accent={accent} />
+        <Projects accent={accent} />
+        <Journey accent={accent} />
+        <Now accent={accent} />
+        <Experience />
+        <Contact accent={accent} />
       </main>
-      <Footer/>
-      <Tweaks tweaks={tweaks} setTweak={setTweak}/>
+      <Footer />
+      <Tweaks tweaks={tweaks} setTweak={setTweak} />
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
