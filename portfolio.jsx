@@ -419,7 +419,7 @@ const PROJECTS = [
 
     tags: ["ai", "rag", "evaluation", "llm"],
 
-    stars: 0,
+    stars: 1,
     forks: 0,
     lang: "Python",
     langColor: "#3572a5",
