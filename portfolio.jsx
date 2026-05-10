@@ -411,6 +411,27 @@ const PROJECTS = [
     fresh: true,
   },
   {
+    name: "rag-eval-platform",
+
+    desc: "Production-grade RAG evaluation platform that benchmarks retrieval-augmented generation systems using RAGAS, G-Eval, and DeepEval in a unified pipeline. Supports document ingestion (PDF/URL/Text), ChromaDB retrieval, LLM generation, and automated evaluation with a single API call. Includes LangSmith tracing, Factory-pattern LLM abstraction, FastAPI backend, and Streamlit dashboard with live eval metrics.",
+
+    tech: ["Python", "LangChain", "OpenAI", "Anthropic", "ChromaDB", "RAGAS", "DeepEval", "LangSmith", "FastAPI", "Streamlit"],
+
+    tags: ["ai", "rag", "evaluation", "llm"],
+
+    stars: 0,
+    forks: 0,
+    lang: "Python",
+    langColor: "#3572a5",
+
+    impact: "diagnosed retrieval precision drop (1.0 → 0.75) and hallucination spike (0.0 → 0.25) using multi-framework eval — fixed via chunk tuning + prompt grounding, improving reliability on mixed-document queries",
+
+    url: "https://github.com/karthikrasamsetti/rag-eval-platform",
+
+    pinned: true,
+    fresh: true,
+  },
+  {
     name: "playwright_UTAF",
     desc: "Universal Test Automation Framework — Page Object Model with parallel sharding, Allure reporting, Docker support, Grafana dashboards for test metrics, and CI/CD across GitHub Actions, Azure Pipelines, and Jenkins.",
     tech: ["JavaScript", "Playwright", "Docker", "Jenkins", "GitHub Actions", "Grafana"],
