@@ -767,7 +767,29 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
   animation: pulse 2s infinite;
 }
 .ktx-launcher-caret { color: var(--fg-3); font-size: 11px; }
-
+.ktx-launcher-avatar {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+.ktx-launcher-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 30%;
+  border: 1px solid var(--line-2);
+  display: block;
+}
+.ktx-launcher-avatar .ktx-launcher-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--bg-1);
+}
 /* panel */
 .ktx-panel {
   width: 380px; max-width: calc(100vw - 32px);
