@@ -219,6 +219,10 @@ function Hero({ accent, variant }) {
     <section className="hero">
       <div className="hero-grid">
         <div className="hero-left">
+          <div className="hero-avatar">
+            <img src="./me.png" alt="Karthik Rasamsetti" />
+            <span className="hero-avatar-ring" style={{ borderColor: accent }} />
+          </div>
           <div className="meta-row">
             <span className="meta-dot" style={{ background: accent }} />
             <span className="meta-text">QA · Automation · {new Date().getFullYear()}</span>
