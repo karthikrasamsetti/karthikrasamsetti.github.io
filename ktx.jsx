@@ -148,7 +148,10 @@ function KtxTerminal() {
     <div className="ktx-root">
       {!open && (
         <button className="ktx-launcher" onClick={() => setOpen(true)} aria-label="Open ktx terminal">
-          <span className="ktx-launcher-dot" />
+          <span className="ktx-launcher-avatar">
+            <img src="./ktx-bot.png" alt="" />
+            <span className="ktx-launcher-dot" />
+          </span>
           <span className="ktx-launcher-text">ask&nbsp;<b>ktx</b></span>
           <span className="ktx-launcher-caret">▸</span>
         </button>
