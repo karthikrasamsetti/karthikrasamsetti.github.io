@@ -329,6 +329,7 @@ const SKILL_GROUPS = [
       { name: "Playwright", level: 92 },
       { name: "Selenium", level: 88 },
       { name: "WebdriverIO", level: 80 },
+      { name: "Karate DSL (API)", level: 78 },
       { name: "Cypress", level: 65 },
     ]
   },
@@ -344,7 +345,7 @@ const SKILL_GROUPS = [
     label: "performance", items: [
       { name: "k6", level: 86 },
       { name: "JMeter", level: 65 },
-      { name: "Lighthouse CI", level: 60 },
+      { name: "WebLoad", level: 60 },
     ]
   },
   {
@@ -353,14 +354,16 @@ const SKILL_GROUPS = [
       { name: "GitHub Actions", level: 78 },
       { name: "Docker", level: 70 },
       { name: "Allure / reporting", level: 75 },
+      { name: "CircleCI", level: 60 },
     ]
   },
   {
-    label: "ai · learning", items: [
-      { name: "LLMs (OpenAI, Claude)", level: 62 },
-      { name: "LangGraph / agents", level: 50 },
-      { name: "RAG pipelines", level: 55 },
-      { name: "Prompt engineering", level: 65 },
+    label: "ai · building", items: [
+      { name: "LLMs (OpenAI, Claude, Groq)", level: 74 },
+      { name: "LangGraph / multi-agent", level: 70 },
+      { name: "RAG pipelines", level: 68 },
+      { name: "LLM eval (DeepEval/RAGAS)", level: 66 },
+      { name: "Prompt engineering", level: 72 },
     ]
   },
 ];
@@ -399,6 +402,47 @@ function Skills({ accent }) {
 // PROJECTS (GitHub-style cards, mocked)
 // ──────────────────────────────────────────────────────────────────────
 const PROJECTS = [
+  {
+    name: "qa-engine",
+    desc: "Intelligent QA Engine — an 11-agent LangGraph platform that turns a plain-English user story into a verified, executed browser test. It validates the story (INVEST), plans steps, maps real DOM elements on the live page, writes a Playwright script, has a Critic review-and-fix it, runs it in an isolated Docker sandbox, self-heals broken selectors, and produces a stakeholder report — streaming its reasoning live to a three-panel dashboard.",
+    tech: ["Python", "LangGraph", "OpenAI", "Anthropic", "Playwright", "Docker", "FastAPI", "ChromaDB"],
+    tags: ["ai", "automation"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "user story → validated, executed browser test with a pass/bug/flaky verdict — end to end, human-in-the-loop only when the story is too vague",
+    url: "https://github.com/karthikrasamsetti/qa-engine",
+    pinned: true,
+    fresh: true,
+  },
+  {
+    name: "diagnostician",
+    desc: "A read-only AI agent that triages CI/CD test failures. Given a failed test's error, logs, retry outcome, commit diff, and run context, it classifies the root cause into one of four categories (application_bug / broken_test / flaky / environment_issue), assigns a confidence score, recommends a next action, and explains its reasoning from the evidence. Decision rules encode how an experienced QA engineer separates causes that share the same symptom.",
+    tech: ["Python", "LangGraph", "Anthropic", "OpenAI", "FastAPI", "pytest"],
+    tags: ["ai", "automation"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "first-pass diagnosis of nightly red tests so engineers only make the final call — never edits code or files tickets",
+    url: "https://github.com/karthikrasamsetti/diagnostician",
+    pinned: true,
+    fresh: true,
+  },
+  {
+    name: "ai-sql-assistant",
+    desc: "Ask questions in plain English, get SQL and answers. Reads your database schema, generates a SQLite query with an LLM (Qwen2.5-Coder-7B via Hugging Face Inference API), validates it read-only, executes it, and returns the results as a table. Schema-aware prompting keeps the model to columns that exist; a safety gate runs only SELECT and rejects writes/DDL/injection chains.",
+    tech: ["Python", "Hugging Face", "Gradio", "SQLite", "pytest"],
+    tags: ["ai"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "natural language → validated read-only SQL with a safety gate; 9 unit tests on SQL cleaning, safety, and the data layer",
+    url: "https://github.com/karthikrasamsetti/ai-sql-assistant",
+    fresh: true,
+  },
+  {
+    name: "karate-api-framework",
+    desc: "Production-grade API automation framework built with Karate DSL — REST and SOAP testing, data-driven runs (JSON/CSV/inline tables), JDBC DB validation, parallel execution, multi-environment config, tag-based runs (@smoke/@regression/@sanity), and full CI/CD with a Jenkins pipeline and GitHub Actions.",
+    tech: ["Java", "Karate DSL", "Maven", "JUnit 5", "Jenkins", "GitHub Actions"],
+    tags: ["automation"],
+    stars: 0, forks: 0, lang: "Gherkin", langColor: "#5b2f91",
+    impact: "one framework covering REST + SOAP + DB validation with smoke-on-push and scheduled regression",
+    url: "https://github.com/karthikrasamsetti/karate-api-framework",
+  },
   {
     name: "test-forge",
     desc: "AI-powered test script generator — a 6-agent pipeline (Reader → Planner → Auth → Crawler → Generator → Validator) that converts manual test cases from CSV/Excel/Word/PDF into production-ready Playwright scripts by crawling the live app for real DOM selectors.",
@@ -592,8 +636,12 @@ const TIMELINE = [
     body: "Moved from single-shot prompts to stateful graphs. Plan → execute → reflect → retry. Currently the most reliable test-author I've worked with."
   },
   {
+    when: "2025 · Q3", title: "Shipped a full multi-agent QA engine",
+    body: "qa-engine: 11 agents from story validation to a Docker-sandboxed run and a self-healing loop, streaming their reasoning live. Also built diagnostician, a read-only agent that triages nightly CI failures into bug / broken-test / flaky / env."
+  },
+  {
     when: "now", title: "Self-healing locators + intent-based tests",
-    body: "Building a small library that lets you describe a test in English and have it survive UI rewrites. Open-sourcing pieces as they harden.", current: true
+    body: "Making agents cheaper and more trustworthy — model routing + cost tracking across OpenAI/Claude/Groq, evals on every verdict, and describing a test in English so it survives UI rewrites. Open-sourcing pieces as they harden.", current: true
   },
 ];
 
@@ -626,11 +674,11 @@ function Journey({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 function Now({ accent }) {
   const items = [
+    { tag: "building", text: "qa-engine — 11-agent LangGraph pipeline: story → executed, self-healing browser test" },
+    { tag: "shipping", text: "diagnostician — read-only agent that triages CI failures into bug / broken-test / flaky / env" },
+    { tag: "tinkering", text: "multi-model compare tool — OpenAI vs Claude vs Groq with live token + cost tracking" },
+    { tag: "studying", text: "LangGraph persistence + model routing across providers" },
     { tag: "reading", text: "“Building Effective Agents” — Anthropic" },
-    { tag: "building", text: "qa-agent-lab — agent that drafts tests from PR diffs" },
-    { tag: "studying", text: "LangGraph state machines + persistence patterns" },
-    { tag: "tinkering", text: "DSPy for prompt optimization on test-classification tasks" },
-    { tag: "watching", text: "How frontier labs do internal evals — fascinating stuff" },
   ];
   return (
     <section className="section now">
@@ -662,7 +710,7 @@ function Now({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 const EXPERIENCE = [
   {
-    role: "QA Automation Engineer",
+    role: "Performance & QA Automation Engineer",
     company: "OnTrac · Logistics & Transportation",
     span: "2024 — Present",
     bullets: [
