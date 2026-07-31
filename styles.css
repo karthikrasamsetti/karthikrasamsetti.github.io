@@ -42,6 +42,8 @@ html, body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 body {
   background-image:
@@ -852,9 +854,26 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
 .ktx-input::placeholder { color: var(--fg-3); }
 .ktx-input:disabled { opacity: .6; }
 
-@media (max-width: 480px) {
-  .ktx-root { right: 14px; bottom: 14px; }
-  .ktx-panel { height: 70vh; }
+@media (max-width: 600px) {
+  .ktx-root {
+    right: 12px;
+    bottom: 12px;
+    left: auto;
+  }
+  .ktx-panel {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    height: 75vh;
+    max-height: 75vh;
+  }
+  .ktx-launcher {
+    padding: 9px 14px 9px 9px;
+    font-size: 12.5px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .ktx-panel, .ktx-line, .ktx-launcher { animation: none; transition: none; }
