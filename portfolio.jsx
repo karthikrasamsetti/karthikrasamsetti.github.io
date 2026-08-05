@@ -407,6 +407,18 @@ function Skills({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    name: "mediclear",
+    desc: "A bilingual health companion that reads a photo or PDF of a prescription or lab report and explains it in plain English, Telugu, and Hindi — with read-aloud, medication reminders, water tracking, and lab-value trend charts. Built so family members who don't read English can understand their own health. Safety-first by design: it explains and organizes, flags anything it reads with low confidence, and never diagnoses or gives personal medical advice — every result routes back to a doctor. A swappable multi-provider AI vision layer (Gemini / Claude / OpenAI) sits behind a factory pattern, with per-user accounts, history, and result caching.",
+    tech: ["React", "FastAPI", "PostgreSQL", "Gemini", "Claude", "OpenAI", "JWT", "Vercel", "Render"],
+    tags: ["ai"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "a medical document → a calm, plain-language explanation your parents can read or hear in their own language — full-stack and deployed",
+    url: "https://github.com/karthikrasamsetti/mediclear",
+    demo: "https://mediclear-mu.vercel.app",
+    pinned: true,
+    fresh: true,
+  },
+  {
     name: "qa-engine",
     desc: "Intelligent QA Engine — an 11-agent LangGraph platform that turns a plain-English user story into a verified, executed browser test. It validates the story (INVEST), plans steps, maps real DOM elements on the live page, writes a Playwright script, has a Critic review-and-fix it, runs it in an isolated Docker sandbox, self-heals broken selectors, and produces a stakeholder report — streaming its reasoning live to a three-panel dashboard.",
     tech: ["Python", "LangGraph", "OpenAI", "Anthropic", "Playwright", "Docker", "FastAPI", "ChromaDB"],
@@ -590,6 +602,7 @@ function Projects({ accent }) {
               <div className="proj-name">
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z" /></svg>
                 <a href={p.url} target="_blank" rel="noreferrer">{p.name}</a>
+                {p.demo && <a className="proj-demo-link" href={p.demo} target="_blank" rel="noreferrer" style={{ color: accent }}>live ↗</a>}
                 {p.pinned && <span className="badge pinned-badge">pinned</span>}
                 {p.fresh && <span className="badge fresh-badge" style={{ color: accent, borderColor: accent }}>new</span>}
               </div>
