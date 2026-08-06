@@ -657,6 +657,10 @@ const TIMELINE = [
     body: "qa-engine: 11 agents from story validation to a Docker-sandboxed run and a self-healing loop, streaming their reasoning live. Also built diagnostician, a read-only agent that triages nightly CI failures into bug / broken-test / flaky / env."
   },
   {
+    when: "2025 · Q4", title: "Shipped MediClear — AI beyond testing",
+    body: "Took everything I'd learned about LLMs and shipped a real product: a bilingual health app that reads prescriptions and lab reports and explains them in English, Telugu & Hindi. Full-stack (React + FastAPI + Postgres), a swappable multi-provider vision layer behind a factory, and a deliberate safety-first design that never diagnoses. Built for my parents; deployed and in daily use."
+  },
+  {
     when: "now", title: "Self-healing locators + intent-based tests",
     body: "Making agents cheaper and more trustworthy — model routing + cost tracking across OpenAI/Claude/Groq, evals on every verdict, and describing a test in English so it survives UI rewrites. Open-sourcing pieces as they harden.", current: true
   },
