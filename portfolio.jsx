@@ -7,7 +7,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#3b82f6",
   "displayFont": "grotesk",
   "density": "comfortable",
-  "heroVariant": "agent",
+  "heroVariant": "random",
   "theme": "dark"
 }/*EDITMODE-END*/;
 
@@ -973,6 +973,7 @@ function Tweaks({ tweaks, setTweak }) {
           value={tweaks.heroVariant}
           onChange={v => setTweak("heroVariant", v)}
           options={[
+            { value: "random", label: "Random (changes each visit)" },
             { value: "test-runner", label: "Live test runner (Playwright)" },
             { value: "agent", label: "AI agent trace log" },
             { value: "perf", label: "k6 perf graph" },
@@ -990,6 +991,15 @@ function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const accent = tweaks.accent;
 
+  // Resolve the hero widget. "random" picks one of the three once per page load
+  // (stable for the session via useMemo, so it doesn't flicker on re-render,
+  // but a fresh visit / refresh shows a different one).
+  const resolvedVariant = useMemo(() => {
+    if (tweaks.heroVariant && tweaks.heroVariant !== "random") return tweaks.heroVariant;
+    const options = ["test-runner", "agent", "perf"];
+    return options[Math.floor(Math.random() * options.length)];
+  }, [tweaks.heroVariant]);
+
   useEffect(() => {
     const r = document.documentElement;
     r.style.setProperty("--accent", accent);
@@ -1001,7 +1011,7 @@ function App() {
     <div className="app">
       <Nav accent={accent} />
       <main>
-        <Hero accent={accent} variant={tweaks.heroVariant} />
+        <Hero accent={accent} variant={resolvedVariant} />
         <About />
         <Skills accent={accent} />
         <Projects accent={accent} />
