@@ -862,11 +862,19 @@ function Contact({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 function Nav({ accent }) {
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("kx-theme") || "dark"; } catch { return "dark"; }
+  });
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("kx-theme", theme); } catch {}
+  }, [theme]);
+
   return (
     <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-inner">
@@ -882,6 +890,20 @@ function Nav({ accent }) {
           <a href="#now">now</a>
           <a href="#contact">contact</a>
         </div>
+        <button
+          className="theme-toggle"
+          onClick={() => setTheme(t => (t === "dark" ? "light" : "dark"))}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        >
+          {theme === "dark" ? (
+            /* sun icon — click for light */
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          ) : (
+            /* moon icon — click for dark */
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          )}
+        </button>
         <a href="#contact" className="nav-cta" style={{ "--accent": accent }}>get in touch</a>
       </div>
     </nav>
@@ -973,7 +995,6 @@ function App() {
     r.style.setProperty("--accent", accent);
     r.dataset.font = tweaks.displayFont;
     r.dataset.density = tweaks.density;
-    r.dataset.theme = tweaks.theme || "dark";
   }, [accent, tweaks.displayFont, tweaks.density]);
 
   return (
