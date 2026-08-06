@@ -562,8 +562,8 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
   align-items: start;
 }
 @media (max-width: 700px) {
-  .tl { padding-left: 4px; }
-  .tl-axis { left: 8px; }
+  .tl { padding-left: 2px; }
+  .tl-axis { left: 11px; }
   .tl-row { grid-template-columns: 20px 1fr; gap: 12px; padding: 14px 0; }
   .tl-when { display: none; }
   .tl-card { padding-left: 16px; margin-left: 0; }

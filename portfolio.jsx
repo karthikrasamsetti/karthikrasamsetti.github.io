@@ -607,8 +607,8 @@ function Projects({ accent }) {
                 {p.fresh && <span className="badge fresh-badge" style={{ color: accent, borderColor: accent }}>new</span>}
               </div>
               <div className="proj-meta">
-                <span className="ghm">★ {p.stars}</span>
-                <span className="ghm">⑂ {p.forks}</span>
+                {p.stars > 0 && <span className="ghm">★ {p.stars}</span>}
+                {p.forks > 0 && <span className="ghm">⑂ {p.forks}</span>}
               </div>
             </div>
             <p className="proj-desc">{p.desc}</p>
