@@ -7,7 +7,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#3b82f6",
   "displayFont": "grotesk",
   "density": "comfortable",
-  "heroVariant": "agent"
+  "heroVariant": "agent",
+  "theme": "dark"
 }/*EDITMODE-END*/;
 
 // ──────────────────────────────────────────────────────────────────────
@@ -246,7 +247,7 @@ function Hero({ accent, variant }) {
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8m0 0L7 3m4 4L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a className="btn ghost" href="./Karthik_Rasamsetti_Resume.pdf" target="_blank" rel="noreferrer">
-              download resume ↓
+              resume ↗
             </a>
             <a className="btn ghost" href="#contact">contact</a>
           </div>
@@ -816,7 +817,7 @@ function Contact({ accent }) {
             </a>
             <a href="./Karthik_Rasamsetti_Resume.pdf" target="_blank" rel="noreferrer" className="cl">
               <span className="cl-k">resume</span>
-              <span className="cl-v">download PDF ↓</span>
+              <span className="cl-v">view PDF ↗</span>
             </a>
           </div>
         </div>
@@ -914,6 +915,15 @@ function Tweaks({ tweaks, setTweak }) {
   return (
     <TweaksPanel title="Tweaks">
       <TweakSection title="Look">
+        <TweakRadio
+          label="Theme"
+          value={tweaks.theme || "dark"}
+          onChange={v => setTweak("theme", v)}
+          options={[
+            { value: "dark", label: "Dark" },
+            { value: "light", label: "Light" },
+          ]}
+        />
         <TweakColor label="Accent" value={tweaks.accent} onChange={v => setTweak("accent", v)} />
         <TweakRadio
           label="Display font"
@@ -963,6 +973,7 @@ function App() {
     r.style.setProperty("--accent", accent);
     r.dataset.font = tweaks.displayFont;
     r.dataset.density = tweaks.density;
+    r.dataset.theme = tweaks.theme || "dark";
   }, [accent, tweaks.displayFont, tweaks.density]);
 
   return (
