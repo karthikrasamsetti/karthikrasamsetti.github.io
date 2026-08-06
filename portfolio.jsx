@@ -245,8 +245,8 @@ function Hero({ accent, variant }) {
               <span>view projects</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8m0 0L7 3m4 4L7 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
-            <a className="btn ghost" href="./Resume.html" target="_blank" rel="noreferrer">
-              view resume ↗
+            <a className="btn ghost" href="./Karthik_Rasamsetti_Resume.pdf" target="_blank" rel="noreferrer">
+              download resume ↓
             </a>
             <a className="btn ghost" href="#contact">contact</a>
           </div>
@@ -732,34 +732,33 @@ function Now({ accent }) {
 const EXPERIENCE = [
   {
     role: "Performance & QA Automation Engineer",
-    company: "OnTrac · Logistics & Transportation",
+    company: "Feuji · OnTrac (Logistics & Transportation)",
     span: "2024 — Present",
     bullets: [
-      "Designed and executed performance testing strategy with k6, holding system stability through peak holiday traffic spikes (~3× normal load).",
-      "Migrated legacy WebLOAD load-testing scripts to k6, cutting execution time by ~40% and unlocking parallel cloud runs.",
-      "Built end-to-end pytest framework covering UI flows + database validation across 4 service modules.",
-      "Integrated automation pipelines into Azure DevOps for continuous testing on every PR — reduced manual regression effort by ~60%.",
+      "Designed and executed the performance testing strategy with k6, holding system stability through peak holiday traffic (~2.5× normal load).",
+      "Migrated legacy WebLOAD performance tests to the open-source k6 CLI, eliminating commercial licensing costs and modernizing the framework.",
+      "Integrated the k6 suite with Azure DevOps pipelines for CI/CD execution and Grafana dashboards for real-time monitoring and trend analysis.",
+      "Built an end-to-end Pytest framework covering UI flows + database validation across 4 service modules; PR-gated CI cut manual regression ~60%.",
     ]
   },
   {
     role: "QA Automation Engineer",
-    company: "LeaseLock · FinTech / Insurance",
+    company: "Feuji · LeaseLock (FinTech / Insurance)",
     span: "2023 — 2024",
     bullets: [
-      "Designed and implemented UTAF (Unified Test Automation Framework) standardising UI, API, and DB testing across teams — adopted by 3 squads.",
+      "Architected UTAF (Unified Test Automation Framework) standardising UI, API, and DB testing across teams — adopted by 3 squads.",
       "Built reusable, modular components covering end-to-end policy and underwriting workflows.",
-      "Wired automation suites into CircleCI with automated email reporting on failures and nightly summaries.",
-      "Lifted test coverage by ~50% and reduced flaky failures through framework reuse and stable selector patterns.",
+      "Wired suites into CircleCI with automated failure reporting and nightly summaries; lifted coverage ~50% with fewer flaky failures.",
     ]
   },
   {
     role: "QA Automation Engineer",
-    company: "Encore · Event Management",
+    company: "Feuji · Encore (Event Management)",
     span: "2022 — 2023",
     bullets: [
-      "Developed and maintained BDD automation scripts in Cucumber for event-management workflows (hotels, infrastructure, services).",
-      "Authored cross-browser test suites running on Chrome, Firefox, Safari, and Edge in parallel.",
-      "Collaborated in Agile ceremonies and partnered with devs on shift-left QA practices.",
+      "Developed and maintained BDD automation in Cucumber for event-management workflows (hotels, infrastructure, services).",
+      "Authored cross-browser suites running on Chrome, Firefox, Safari, and Edge in parallel.",
+      "Collaborated in Agile ceremonies and partnered with developers on shift-left QA practices.",
     ]
   },
 ];
@@ -815,9 +814,9 @@ function Contact({ accent }) {
               <span className="cl-k">linkedin</span>
               <span className="cl-v">/in/karthikrasamsetti</span>
             </a>
-            <a href="./Resume.html" target="_blank" rel="noreferrer" className="cl">
+            <a href="./Karthik_Rasamsetti_Resume.pdf" target="_blank" rel="noreferrer" className="cl">
               <span className="cl-k">resume</span>
-              <span className="cl-v">3 formats · view &amp; print ↗</span>
+              <span className="cl-v">download PDF ↓</span>
             </a>
           </div>
         </div>
