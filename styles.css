@@ -929,3 +929,13 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
   .ktx-panel, .ktx-line, .ktx-launcher { animation: none; transition: none; }
   .ktx-launcher-dot { animation: none; }
 }
+/* ─── theme toggle (nav) ─────────────────────────────── */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 9px;
+  color: var(--fg-2); border: 1px solid var(--line);
+  background: color-mix(in oklch, var(--bg-1) 60%, transparent);
+  transition: color .15s, border-color .15s, background .15s;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--line-2); }
+@media (max-width: 640px) { .theme-toggle { width: 34px; height: 34px; } }
