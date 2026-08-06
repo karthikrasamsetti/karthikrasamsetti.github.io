@@ -32,6 +32,33 @@
 
 [data-density="compact"] { --pad: 22px; --gap: 16px; }
 
+/* ─── LIGHT THEME ──────────────────────────────────────
+   A designed light palette — warm off-white, softened lines,
+   readable ink (not pure black), accent darkened for contrast.
+   Dark remains the default; this applies only when data-theme="light". */
+[data-theme="light"] {
+  --accent: #2563eb;              /* slightly deeper blue for contrast on light */
+  --bg:   #f7f8fa;                /* warm off-white, not harsh pure white */
+  --bg-1: #ffffff;               /* cards / panels */
+  --bg-2: #f0f2f5;               /* raised surfaces (test runner, etc.) */
+  --line: #e2e5ea;
+  --line-2: #d3d7de;
+  --fg:   #1a1d24;               /* near-black ink, softer than #000 */
+  --fg-2: #4a5160;
+  --fg-3: #8a93a3;
+  --pass: #16a34a;
+  --fail: #dc2626;
+  --warn: #d97706;
+}
+/* selection text stays legible in light mode */
+[data-theme="light"] ::selection { color: #fff; }
+/* soften the fixed background glows so they don't muddy the light bg */
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, color-mix(in oklch, var(--accent) 5%, transparent), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, color-mix(in oklch, var(--accent) 4%, transparent), transparent 55%);
+}
+
 * { box-sizing: border-box; }
 html, body {
   margin: 0; padding: 0;
@@ -228,6 +255,19 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
     0 24px 60px rgba(0,0,0,0.5),
     0 0 0 1px color-mix(in oklch, var(--accent) 8%, transparent),
     inset 0 1px 0 rgba(255,255,255,0.04);
+}
+/* In light mode, keep the runner a dark "screen" (like a real terminal/editor).
+   This preserves the engineering aesthetic instead of a glaring white box. */
+[data-theme="light"] .test-runner {
+  --bg-1: #0c0e12;
+  --bg-2: #11141a;
+  --line: #1a1d24;
+  --fg: #e6e8ec;
+  --fg-2: #a8aeb9;
+  --fg-3: #6b7280;
+  box-shadow:
+    0 18px 44px rgba(20,30,60,0.18),
+    0 0 0 1px color-mix(in oklch, var(--accent) 10%, transparent);
 }
 .tr-chrome {
   display: flex; align-items: center; gap: 14px;
