@@ -553,7 +553,6 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
 /* ─── JOURNEY ──────────────────────────────────────────── */
 .tl { position: relative; padding-left: 24px; }
 .tl-axis { position: absolute; left: 124px; top: 12px; bottom: 12px; width: 1px; }
-@media (max-width: 700px) { .tl-axis { left: 8px; } }
 
 .tl-row {
   display: grid;
@@ -562,7 +561,16 @@ main { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
   padding: 18px 0;
   align-items: start;
 }
-@media (max-width: 700px) { .tl-row { grid-template-columns: 0 24px 1fr; } .tl-when { display: none; } }
+@media (max-width: 700px) {
+  .tl { padding-left: 4px; }
+  .tl-axis { left: 8px; }
+  .tl-row { grid-template-columns: 20px 1fr; gap: 12px; padding: 14px 0; }
+  .tl-when { display: none; }
+  .tl-card { padding-left: 16px; margin-left: 0; }
+  .tl-card h4 { font-size: 16.5px; flex-wrap: wrap; gap: 8px; }
+  .tl-card p { font-size: 13.5px; line-height: 1.6; }
+  .now-tag { font-size: 9px; }
+}
 
 .tl-when {
   font-family: var(--f-mono); font-size: 12px;
