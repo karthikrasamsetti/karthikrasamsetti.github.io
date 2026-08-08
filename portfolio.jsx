@@ -408,6 +408,18 @@ function Skills({ accent }) {
 // ──────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    name: "budgetflow",
+    desc: "A full-stack personal budget planner with an AI assistant. Track income and expenses, set category budgets with threshold alerts, manage recurring transactions, and talk to an assistant that adds transactions from plain English (\"spent 500 on transport today\"), answers spending questions over your own data via tool-calling, auto-categorizes, and writes monthly insights. Built on a clean layered architecture where the AI tools call the exact same service layer the API does — one code path, tested once. A swappable multi-provider AI layer (Groq / Gemini / HuggingFace) sits behind a factory pattern, with per-call observability (tokens, latency, cost) logged to power a usage view, and persisted chat sessions for multi-turn memory. Deliberately no LangGraph or vector DB — the assistant is three separable jobs behind a thin intent router, and SQL answers every spending question exactly.",
+    tech: ["React", "FastAPI", "PostgreSQL", "SQLAlchemy", "Alembic", "Groq", "Gemini", "HuggingFace", "JWT", "Docker", "Vercel", "Render", "Neon"],
+    tags: ["ai"],
+    stars: 0, forks: 0, lang: "Python", langColor: "#3572a5",
+    impact: "plain English → a categorized transaction, and a question → a real answer from your own spending — full-stack, observable, and deployed",
+    url: "https://github.com/karthikrasamsetti/budgetflow",
+    demo: "https://budgetflow-nine-zeta.vercel.app",
+    pinned: true,
+    fresh: true,
+  },
+  {
     name: "mediclear",
     desc: "A bilingual health companion that reads a photo or PDF of a prescription or lab report and explains it in plain English, Telugu, and Hindi — with read-aloud, medication reminders, water tracking, and lab-value trend charts. Built so family members who don't read English can understand their own health. Safety-first by design: it explains and organizes, flags anything it reads with low confidence, and never diagnoses or gives personal medical advice — every result routes back to a doctor. A swappable multi-provider AI vision layer (Gemini / Claude / OpenAI) sits behind a factory pattern, with per-user accounts, history, and result caching.",
     tech: ["React", "FastAPI", "PostgreSQL", "Gemini", "Claude", "OpenAI", "JWT", "Vercel", "Render"],
@@ -660,6 +672,10 @@ const TIMELINE = [
   {
     when: "2025 · Q4", title: "Shipped MediClear — AI beyond testing",
     body: "Took everything I'd learned about LLMs and shipped a real product: a bilingual health app that reads prescriptions and lab reports and explains them in English, Telugu & Hindi. Full-stack (React + FastAPI + Postgres), a swappable multi-provider vision layer behind a factory, and a deliberate safety-first design that never diagnoses. Built for my parents; deployed and in daily use."
+  },
+  {
+    when: "2026 · Q1", title: "Shipped BudgetFlow — full-stack + AI, my own product idea",
+    body: "A personal budget planner I actually use, built to demonstrate engineering maturity: a service layer the API and the AI assistant both call, an intent router over NL-add / spending Q&A / insights, and per-call AI observability (tokens, latency, cost) with persisted chat history. Deliberately no LangGraph or vector DB — I wrote up why in the README. React + FastAPI + async SQLAlchemy + Alembic, Groq/Gemini/HF behind a factory, 34 tests and CI, deployed on Vercel + Render + Neon."
   },
   {
     when: "now", title: "Self-healing locators + intent-based tests",
